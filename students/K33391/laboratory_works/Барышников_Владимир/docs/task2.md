@@ -72,5 +72,5 @@
     Когда ответ приходит, клиентская часть выводит результат на экран.  
     
     
-    ![](http://localhost:8000/img/lab1/task2_client.png)  
+    ![](http://ung1n.github.io/ITMO_ICT_WebDevelopment_2023-2024/img/lab1/task2_client.png)  
     Результат в консоли клиента

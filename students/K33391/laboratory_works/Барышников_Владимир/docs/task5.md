@@ -215,5 +215,5 @@
     
     2.4 - Строка "GRADES" в HTML-коде будет заменена на список оценок, полученных от сервера, при обработке GET-запроса в методе handle_get_request класса MyHTTPServer.
 
-![](http://localhost:8000/img/lab1/task5.png)  
+![](http://ung1n.github.io/ITMO_ICT_WebDevelopment_2023-2024/img/lab1/task5.png)  
 Результат на сайте

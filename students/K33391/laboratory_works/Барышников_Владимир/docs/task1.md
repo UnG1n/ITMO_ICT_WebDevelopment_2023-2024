@@ -27,7 +27,7 @@
     После чего начинаем бесконечный цикл ожидания сообщений от клиентов  
     Когда сервер получает он выводит его на экран и отправляет ответ "Hello, client" обратно на адрес клиента.  
       
-    ![](http://localhost:8000/img/lab1/task1_serv.png)  
+    ![](http://ung1n.github.io/ITMO_ICT_WebDevelopment_2023-2024/img/lab1/task1_serv.png)  
     Результат в консоли сервера
 
 
@@ -53,6 +53,5 @@
     IP-адрес и порт.  
     После чего мы ждем отве от сервера и выводим полученное сообщение.
 
-    ![](http://localhost:8000/img/lab1/task1_client.png)  
+    ![](http://ung1n.github.io/ITMO_ICT_WebDevelopment_2023-2024/img/lab1/task1_client.png)  
     Результат в консоли клиента
-
