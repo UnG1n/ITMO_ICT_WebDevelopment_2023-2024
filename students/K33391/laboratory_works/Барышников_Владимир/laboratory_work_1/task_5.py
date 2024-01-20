@@ -76,7 +76,7 @@ class MyHTTPServer:
             html_file = html_file.replace("GRADES", grades)
             self.send_response(conn, html_file)
         else:
-            with open("not_found.html", encoding="utf-8") as f:
+            with open("index.html", encoding="utf-8") as f:
                 html_file = f.read()
             self.send_response(conn, html_file, status_code="404 Not Found")
 
@@ -88,7 +88,7 @@ class MyHTTPServer:
 
             self.send_response(conn, "")
         else:
-            with open("not_found.html", encoding="utf-8") as f:
+            with open("index.html", encoding="utf-8") as f:
                 html_file = f.read()
             self.send_response(conn, html_file, status_code="404 Not Found")
 

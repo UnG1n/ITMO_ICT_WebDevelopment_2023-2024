@@ -40,4 +40,11 @@ nav:
       - Задание 3: task3.md
       - Задание 4: task4.md
       - Задание 5: task5.md
+  - "Лабораторная №2":
+      - Модели: lab_2_models.md
+      - Админ: lab_2_admin.md
+      - Формы: lab_2_forms.md
+      - Представления: lab_2_views.md
+      - Маршрутизация: lab_2_urls.md
+      - Шаблоны: lab_2_templates.md
 
