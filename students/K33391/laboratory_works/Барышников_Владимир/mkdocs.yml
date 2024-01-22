@@ -47,4 +47,7 @@ nav:
       - Представления: lab_2_views.md
       - Маршрутизация: lab_2_urls.md
       - Шаблоны: lab_2_templates.md
+  - "Лабораторная №3":
+      - Практика_3.1: practice_3.md
+
 
