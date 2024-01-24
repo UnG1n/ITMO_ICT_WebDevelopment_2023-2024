@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'avia_app',
+    'rest_framework',
+    'rest_framework.authtoken',
     'djoser',
     'drf_yasg',
 ]
