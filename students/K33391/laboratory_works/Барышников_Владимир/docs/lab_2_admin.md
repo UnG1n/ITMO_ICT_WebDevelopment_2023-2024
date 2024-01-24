@@ -42,7 +42,7 @@
     ConferenceAdmin. 
     Атрибут list_display ConferenceAdmin определяет поля, которые будут отображаться в списке моделей в интерфейсе администратора.
 
-    ![](http://ung1n.github.io/ITMO_ICT_WebDevelopment_2023-2024/img/lab1/conf_main.png)  
+    ![](http://ung1n.github.io/ITMO_ICT_WebDevelopment_2023-2024/img/lab2/conf_main.png)  
 
 
 
