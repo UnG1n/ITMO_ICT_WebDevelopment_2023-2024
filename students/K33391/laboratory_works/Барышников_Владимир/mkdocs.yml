@@ -54,6 +54,12 @@ nav:
       - Сериализаторы: lab_3_serilizators.md
       - Представления: lab_3_views.md
       - Маршрутизация: lab_3_urls.md
+  - "Лабораторная №4":
+      - Знакомство с vue.js: lab_4_start.md
+      - Компоненты: lab_4_components.md
+      - Роутер: lab_4_router.md
+      - Макет: lab_4_main.md
+      - Работа Сайта: lab_4_site.md
 
 
 

@@ -1,7 +1,7 @@
 from djoser.serializers import UserSerializer
 from rest_framework import serializers
 from djoser.serializers import TokenCreateSerializer
-from .models import Airplane, Flight, CrewMember, TransitStop, Employee
+from .models import Aircraft, Flight, CrewMember, Employee
 
 
 class CustomTokenCreateSerializer(TokenCreateSerializer):
@@ -21,9 +21,9 @@ class CustomUserSerializer(UserSerializer):
         fields = ('id', 'email', 'username', 'first_name', 'last_name', 'is_active', 'date_joined')
 
 
-class AirplaneSerializer(serializers.ModelSerializer):
+class AircraftSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Airplane
+        model = Aircraft
         fields = '__all__'
 
 
@@ -37,13 +37,6 @@ class CrewMemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = CrewMember
         fields = '__all__'
-
-
-class TransitStopSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TransitStop
-        fields = '__all__'
-
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:

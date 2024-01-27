@@ -1,70 +1,126 @@
-from rest_framework import generics, viewsets
-from .models import Airplane, Flight, CrewMember, TransitStop, Employee
-from .serializers import AirplaneSerializer, FlightSerializer, CrewMemberSerializer, TransitStopSerializer, \
-    EmployeeSerializer
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login as auth_login
-from django.views.generic.edit import FormView
-from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
+from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Aircraft, Flight, CrewMember, Employee
+from .serializers import AircraftSerializer, FlightSerializer, CrewMemberSerializer, EmployeeSerializer
+from djoser.views import UserViewSet as DjoserUserViewSet
 
 
-class UserCreateView(FormView):
-    template_name = 'register.html'
-    form_class = UserCreationForm
-    success_url = reverse_lazy('token_create')
+class CustomUserViewSet(DjoserUserViewSet):
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
-    def form_valid(self, form):
-        user = form.save()
-        auth_login(self.request, user)
-        return HttpResponseRedirect(self.get_success_url())
-
-
-class AirplaneViewSet(viewsets.ModelViewSet):
-    queryset = Airplane.objects.all()
-    serializer_class = AirplaneSerializer
-
-
-class AirplaneDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Airplane.objects.all()
-    serializer_class = AirplaneSerializer
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
 
 
-class FlightViewSet(viewsets.ModelViewSet):
+class AircraftList(APIView):
+    http_method_names = ['get', 'post']
+
+    def get(self, request, *args, **kwargs):
+        queryset = Aircraft.objects.all()
+        serializer = AircraftSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        serializer = AircraftSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AircraftDetail(generics.RetrieveAPIView):
+    queryset = Aircraft.objects.all()
+    serializer_class = AircraftSerializer
+
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class FlightList(APIView):
+    http_method_names = ['get', 'post']
+
+    def get(self, request, *args, **kwargs):
+        queryset = Flight.objects.all()
+        serializer = FlightSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        serializer = FlightSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class FlightDetail(generics.RetrieveAPIView):
     queryset = Flight.objects.all()
     serializer_class = FlightSerializer
 
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-class FlightDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Flight.objects.all()
-    serializer_class = FlightSerializer
+
+class CrewMemberList(APIView):
+    http_method_names = ['get', 'post']
+
+    def get(self, request, *args, **kwargs):
+        queryset = CrewMember.objects.all()
+        serializer = CrewMemberSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        serializer = CrewMemberSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class CrewMemberViewSet(viewsets.ModelViewSet):
+class CrewMemberDetail(generics.RetrieveAPIView):
     queryset = CrewMember.objects.all()
     serializer_class = CrewMemberSerializer
 
-
-class CrewMemberDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = CrewMember.objects.all()
-    serializer_class = CrewMemberSerializer
-
-
-class TransitStopViewSet(viewsets.ModelViewSet):
-    queryset = TransitStop.objects.all()
-    serializer_class = TransitStopSerializer
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class TransitStopDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = TransitStop.objects.all()
-    serializer_class = TransitStopSerializer
+class EmployeeList(APIView):
+    http_method_names = ['get', 'post']
+
+    def get(self, request, *args, **kwargs):
+        queryset = Employee.objects.all()
+        serializer = EmployeeSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        serializer = EmployeeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class EmployeeViewSet(viewsets.ModelViewSet):
+class EmployeeDetail(generics.RetrieveAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
-
-class EmployeeDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Employee.objects.all()
-    serializer_class = EmployeeSerializer
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
